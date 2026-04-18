@@ -6,257 +6,183 @@
  * @website https://github.com/nightwielder23/discord-fluidui
  */
 
-/* =========================================================================
-   SECTION 1 — KEYFRAMES
-   Every keyframe is restricted to transform and opacity so the browser
-   can composite on the GPU without triggering layout or paint.
-   ========================================================================= */
-
-/* Rises into place from slightly below */
 @keyframes fluidSlideUp {
-  from {
-    transform: translateY(7px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(7px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
-
-/* Drops into place from slightly above */
 @keyframes fluidSlideDown {
-  from {
-    transform: translateY(-5px);
-    opacity: 0;
-  }
-  to {
-    transform: translateY(0);
-    opacity: 1;
-  }
+  from { transform: translateY(-5px); opacity: 0; }
+  to { transform: translateY(0); opacity: 1; }
 }
-
-/* Scales up from a compact starting size with a soft fade */
 @keyframes fluidScaleIn {
-  from {
-    transform: scale(0.94);
-    opacity: 0;
-  }
-  to {
-    transform: scale(1);
-    opacity: 1;
-  }
+  from { transform: scale(0.94); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
 }
-
-/* Slides in from the left edge */
 @keyframes fluidSlideInLeft {
-  from {
-    transform: translateX(-8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(-8px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
-
-/* Slides in from the right edge */
 @keyframes fluidSlideInRight {
-  from {
-    transform: translateX(8px);
-    opacity: 0;
-  }
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
+  from { transform: translateX(8px); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
 }
-
-/* Pure opacity fade — no motion */
 @keyframes fluidFadeIn {
-  from {
-    opacity: 0;
-  }
-  to {
-    opacity: 1;
-  }
+  from { opacity: 0; }
+  to { opacity: 1; }
 }
 
-/* =========================================================================
-   SECTION 2 — ENTRANCE ANIMATIONS
-   For popouts, profile modals, and generic modals the animation is applied
-   to the first child rather than the container itself. This leaves room
-   for theme authors to inject background layers, blurs, and accent strips
-   on the parent without those layers getting swept into the transform.
-   ========================================================================= */
+/* ENTRANCE ANIMATIONS */
 
-/* 1. Context menus — right-click menus slide in from the left */
 [class*="menu_"] {
   will-change: transform;
   animation: fluidSlideInLeft 0.14s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* 2. User popout — animate inner content only to protect theme background layers */
 [class*="userPopout_"] > :first-child,
 .user-profile-popout > :first-child {
   will-change: transform;
-  animation: fluidScaleIn 0.2s cubic-bezier(0.34, 1.1, 0.64, 1);
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 3. User profile modal — supports legacy, v1, and v2 profile modal variants */
 [class*="userProfileModal_"] > :first-child,
 .user-profile-modal > :first-child,
 .user-profile-modal-v2 > :first-child {
   will-change: transform;
-  animation: fluidScaleIn 0.22s cubic-bezier(0.34, 1.08, 0.64, 1);
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 4. All other modals — settings, image viewer, confirmation dialogs, etc. */
-[class*="modal_"][class*="root_"] > :first-child {
+[class*="layer_"] > [class*="animatorLeft_"],
+[class*="layer_"] > [class*="animatorRight_"],
+[class*="layer_"] > [class*="animatorBottom_"],
+[class*="layer_"] > [class*="animatorTop_"] {
   will-change: transform;
-  animation: fluidScaleIn 0.2s cubic-bezier(0.34, 1.08, 0.64, 1);
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 5. Modal backdrop — pure opacity fade, never animate the blur */
 [class*="backdrop_"] {
-  will-change: transform;
   animation: fluidFadeIn 0.18s ease;
 }
 
-/* 6. Tooltips — instant pop so hover feedback feels immediate */
 [class*="tooltip_"] {
-  will-change: transform;
-  animation: fluidScaleIn 0.1s ease;
+  animation: fluidFadeIn 0.15s ease;
 }
 
-/* 7. Emoji picker — rises up from the chat bar */
-[class*="emojiPicker_"] {
-  will-change: transform;
-  animation: fluidSlideUp 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 8. GIF picker — matches emoji picker motion */
-[class*="gifPicker_"] {
-  will-change: transform;
-  animation: fluidSlideUp 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-/* 9. Sticker picker — matches emoji picker motion */
+[class*="emojiPicker_"],
+[class*="gifPicker_"],
 [class*="stickerPickerInner_"] {
   will-change: transform;
   animation: fluidSlideUp 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* 10. Reaction and expression picker — slightly quicker since it is smaller */
 [class*="reactionPicker_"],
 [class*="expressionPicker_"] {
   will-change: transform;
   animation: fluidSlideUp 0.16s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* 11. Autocomplete and slash command popup — appears above the message box */
 [class*="autocomplete_"] {
   will-change: transform;
   animation: fluidSlideUp 0.14s ease;
 }
 
-/* 12. Search results panel — drops down from the top of the chat area */
 [class*="searchResults_"] {
   will-change: transform;
   animation: fluidSlideDown 0.18s ease;
 }
 
-/* 13. Inbox panel — slides in from the right edge */
 [class*="inboxContent_"] {
   will-change: transform;
   animation: fluidSlideInRight 0.18s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* 14. Thread panel — slides in alongside the main chat */
 [class*="threadSidebar_"] {
   will-change: transform;
   animation: fluidSlideInRight 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 
-/* 15. Dropdown menus — the menu nested inside a select control */
-[class*="select_"] [class*="menu_"] {
-  will-change: transform;
-  animation: fluidSlideDown 0.14s ease;
-}
-
-/* 16. Typing indicator — soft fade when someone starts typing */
 [class*="typing_"] {
-  will-change: transform;
   animation: fluidFadeIn 0.15s ease;
 }
 
-/* 17. Message action buttons bar — the hover toolbar on individual messages */
 [class*="buttonsInner_"] {
   will-change: transform;
-  animation: fluidScaleIn 0.12s ease;
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-/* 18. Settings sidebar items — each row in the user / server settings nav */
-[class*="standardSidebarView_"] [class*="item_"] {
+/* Settings sidebar main items — confirmed class from DevTools */
+[class*="item_caf372"],
+[data-settings-sidebar-item] {
   will-change: transform;
-  animation: fluidSlideInLeft 0.1s ease;
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
 }
 
-/* 19. Member list items — each row in the right-hand member list */
+[class*="item_caf372"]:hover,
+[data-settings-sidebar-item]:hover {
+  transform: scale(1.01) translateX(1px);
+}
+
+/* Settings sub-items */
+[class*="item_e4d939"][role="listitem"] {
+  will-change: transform;
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="item_e4d939"][role="listitem"]:hover {
+  transform: scale(1.01) translateX(1px);
+}
+
 [class*="members_"] [class*="member_"] {
-  will-change: transform;
+  animation: fluidFadeIn 0.15s ease;
+  will-change: opacity;
+}
+
+/* Member list panel slide in */
+[class*="members_"] {
+  animation: fluidSlideInRight 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* Settings modal entrance */
+[class*="sidebar__409aa"] ~ [class*="contentRegion_"] {
+  animation: fluidFadeIn 0.2s ease;
+}
+
+/* Pins, members, search panels */
+[class*="container_"] [class*="header_"] ~ * {
   animation: fluidFadeIn 0.15s ease;
 }
 
-/* =========================================================================
-   SECTION 3 — HOVER MICRO-INTERACTIONS
-   Transitions rather than keyframe animations. Scoped carefully so server
-   icon styling does not leak into the emoji picker or reaction bar.
-   ========================================================================= */
-
-/* 1. Server icons — strictly scoped to the left-hand guild nav */
-nav[class*="guilds"] [class*="listItem_"],
-div[class*="stack"][aria-label="Servers"] [class*="listItem_"] {
+/* Server icons — confirmed working selector */
+nav[class*="guilds"] [class*="listItem"] {
+  transition: transform 0.25s cubic-bezier(0.34, 1.15, 0.64, 1);
   will-change: transform;
-  transition: transform 0.18s ease;
 }
 
-nav[class*="guilds"] [class*="listItem_"]:hover,
-div[class*="stack"][aria-label="Servers"] [class*="listItem_"]:hover {
-  transform: scale(1.08);
+nav[class*="guilds"] [class*="listItem"]:hover {
+  transform: scale(1.1);
 }
 
-nav[class*="guilds"] [class*="listItem_"]:active,
-div[class*="stack"][aria-label="Servers"] [class*="listItem_"]:active {
-  transform: scale(0.96);
+nav[class*="guilds"] [class*="listItem"]:active {
+  transform: scale(0.95);
 }
 
-/* 2. DM list items — lift the row and overlay a subtle white wash on hover */
-ul[aria-label="Direct Messages"] [class*="channel_"] {
-  will-change: transform;
-  transition: transform 0.15s ease;
-  position: relative;
+/* DM and friends list rows — confirmed working selector */
+[aria-label="Direct Messages"] [role="listitem"] {
+  transition: transform 0.18s cubic-bezier(0.34, 1.1, 0.64, 1), background 0.15s ease !important;
+  transform-origin: left center !important;
 }
 
-ul[aria-label="Direct Messages"] [class*="channel_"]::after {
-  content: "";
-  position: absolute;
-  inset: 0;
-  pointer-events: none;
-  border-radius: inherit;
-  background: rgba(255, 255, 255, 0);
-  transition: background 0.15s ease;
+[aria-label="Direct Messages"] [role="listitem"]:hover {
+  transform: scale(1.02) !important;
+  background: rgba(255, 255, 255, 0.06) !important;
 }
 
-ul[aria-label="Direct Messages"] [class*="channel_"]:hover {
-  transform: translateY(-1px) scale(1.01);
+[aria-label="Direct Messages"] [role="listitem"]:active {
+  transform: scale(0.99) !important;
 }
 
-ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
-  background: rgba(255, 255, 255, 0.04);
-}
-
-/* 3. Channel list items — nudge the inner link only so thread spines stay put */
+/* CHANNEL LIST ITEMS — inner link only */
 [class*="containerDefault_"]:has([class*="link_"]) [class*="link_"] {
   will-change: transform;
   transition: transform 0.15s ease;
@@ -266,7 +192,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: translateX(3px);
 }
 
-/* 4. Member list items — small drift on hover */
+/* MEMBER LIST */
 [class*="member_"] {
   will-change: transform;
   transition: transform 0.15s ease;
@@ -276,7 +202,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: translateX(2px);
 }
 
-/* 5. Filled and outlined buttons — grow on hover, press in on click */
+/* BUTTONS */
 [class*="button_"][class*="lookFilled_"],
 [class*="button_"][class*="lookOutlined_"] {
   will-change: transform;
@@ -293,7 +219,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(0.96);
 }
 
-/* 6. Role pills — tiny scale bump inside user profiles */
+/* ROLE PILLS */
 [class*="role_"] {
   will-change: transform;
   transition: transform 0.12s ease;
@@ -303,7 +229,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(1.05);
 }
 
-/* 7. Reaction buttons — pop up slightly on hover, press in on click */
+/* REACTIONS */
 [class*="reactionBtn_"],
 [class*="reaction_"] {
   will-change: transform;
@@ -320,37 +246,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(0.95);
 }
 
-/* 8. Home / DM button — top of the server sidebar */
-[aria-label="Direct Messages"] {
-  will-change: transform;
-  transition: transform 0.18s ease;
-}
-
-[aria-label="Direct Messages"]:hover {
-  transform: scale(1.1);
-}
-
-/* 9. Friend list items — each row on the Friends tab */
-[class*="friendRow_"] {
-  will-change: transform;
-  transition: transform 0.15s ease;
-}
-
-[class*="friendRow_"]:hover {
-  transform: translateX(2px);
-}
-
-/* 10. Message hover left accent — box-shadow only so messages never shift */
-[class*="message_"][class*="cozy_"] {
-  will-change: transform;
-  transition: box-shadow 0.15s ease;
-}
-
-[class*="message_"][class*="cozy_"]:hover {
-  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.1);
-}
-
-/* 11. User avatar — bottom-left account panel */
+/* USER AVATAR BOTTOM LEFT */
 [class*="avatarWrapper_"] {
   will-change: transform;
   transition: transform 0.15s ease;
@@ -360,7 +256,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(1.08);
 }
 
-/* 12. Server folder — the grouping container in the guild nav */
+/* SERVER FOLDERS */
 [class*="folder_"] {
   will-change: transform;
   transition: transform 0.18s ease;
@@ -370,17 +266,7 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(1.06);
 }
 
-/* 13. Image and attachment thumbnails — gentle zoom in the chat */
-[class*="imageWrapper_"] {
-  will-change: transform;
-  transition: transform 0.2s ease;
-}
-
-[class*="imageWrapper_"]:hover {
-  transform: scale(1.02);
-}
-
-/* 14. Emoji in picker grid — jump on hover for a playful feel */
+/* EMOJI PICKER ITEMS */
 [class*="emojiItemWrapper_"] {
   will-change: transform;
   transition: transform 0.12s ease;
@@ -390,7 +276,13 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(1.2) translateY(-2px);
 }
 
-/* 15. Toolbar icon buttons — gift, sticker, GIF, emoji buttons */
+/* IMAGE THUMBNAILS */
+[class*="messageListItem_"] [class*="imageWrapper_"]:hover {
+  transform: scale(1.02);
+  transition: transform 0.2s ease;
+}
+
+/* TOOLBAR ICONS */
 [class*="iconWrapper_"] {
   will-change: transform;
   transition: transform 0.15s ease;
@@ -400,77 +292,48 @@ ul[aria-label="Direct Messages"] [class*="channel_"]:hover::after {
   transform: scale(1.1);
 }
 
-/* =========================================================================
-   SECTION 4 — FOCUS STATES
-   Soft white glow ring for focused text areas and inputs.
-   ========================================================================= */
+/* MESSAGE HOVER */
+[class*="message_"][class*="cozy_"] {
+  transition: box-shadow 0.15s ease, background 0.15s ease;
+}
 
-[class*="channelTextArea_"] [class*="textArea_"]:focus-within,
+[class*="message_"][class*="cozy_"]:hover {
+  box-shadow: inset 3px 0 0 rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.015);
+}
+
+/* FOCUS STATES */
+[class*="channelTextArea_"] {
+  transition: none;
+}
+
 [class*="input_"]:focus {
   box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
   transition: box-shadow 0.15s ease;
 }
 
-/* =========================================================================
-   SECTION 5 — MESSAGE HOVER HIGHLIGHT
-   Near-invisible white wash so messages gain a whisper of emphasis on
-   hover without fighting any theme's own hover state.
-   ========================================================================= */
-
-[class*="message_"][class*="cozy_"] {
-  transition: box-shadow 0.15s ease;
-}
-
-[class*="message_"][class*="cozy_"]:hover {
-  background: rgba(255, 255, 255, 0.015);
-}
-
-/* =========================================================================
-   SECTION 6 — SCROLLBAR
-   Slim white-wash scrollbars that fade into any theme background.
-   ========================================================================= */
-
-::-webkit-scrollbar {
-  width: 4px;
-}
-
-::-webkit-scrollbar-track {
-  background: transparent;
-}
-
+/* SCROLLBAR */
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
   background: rgba(255, 255, 255, 0.12);
   border-radius: 2px;
 }
-
 ::-webkit-scrollbar-thumb:hover {
   background: rgba(255, 255, 255, 0.22);
 }
 
-/* =========================================================================
-   SECTION 7 — SMOOTH SCROLL
-   Applies to every scrollable surface Discord exposes via scrollerBase.
-   ========================================================================= */
-
+/* SMOOTH SCROLL */
 [class*="scrollerBase_"] {
   scroll-behavior: smooth;
 }
 
-/* =========================================================================
-   SECTION 8 — UNREAD PILL GLOW
-   Soft halo on the white unread indicator beside server icons.
-   ========================================================================= */
-
+/* UNREAD PILL GLOW */
 nav[class*="guilds"] [class*="unread_"] {
   box-shadow: 0 0 6px rgba(255, 255, 255, 0.2);
 }
 
-/* =========================================================================
-   SECTION 9 — SELECTED CHANNEL HIGHLIGHT
-   A crisp left rail plus a short bleed-in so the active channel reads
-   clearly without depending on any theme-specific color token.
-   ========================================================================= */
-
+/* SELECTED CHANNEL */
 [class*="containerDefault_"][class*="modeSelected_"],
 [class*="containerDefault_"][class*="modeConnected_"] {
   box-shadow:
@@ -478,18 +341,12 @@ nav[class*="guilds"] [class*="unread_"] {
     inset 6px 0 12px -6px rgba(255, 255, 255, 0.08);
 }
 
-/* =========================================================================
-   SECTION 10 — ACCESSIBILITY
-   Honors the OS-level reduce motion preference. Durations collapse to
-   a near-zero value so end states still paint, but nothing moves.
-   ========================================================================= */
-
+/* ACCESSIBILITY */
 @media (prefers-reduced-motion: reduce) {
-  *,
-  *::before,
-  *::after {
+  *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
 }
+
