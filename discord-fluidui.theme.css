@@ -164,12 +164,12 @@ nav[class*="guilds"] [class*="listItem"]:active {
 }
 
 /* CHANNEL LIST ITEMS — inner link only */
-[class*="containerDefault_"]:has([class*="link_"]) {
+[class*="containerDefault_"]:has([class*="link_"]):not(:has([class*="voiceUser_"])) {
   transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
   transform-origin: left center;
 }
 
-[class*="containerDefault_"]:has([class*="link_"]):hover {
+[class*="containerDefault_"]:has([class*="link_"]):not(:has([class*="voiceUser_"])):hover {
   transform: scale(1.02);
 }
 
@@ -281,7 +281,11 @@ nav[class*="guilds"] [class*="listItem"]:active {
 
 /* FOCUS STATES */
 [class*="channelTextArea_"] {
-  transition: none;
+  transition: box-shadow 0.2s ease;
+}
+
+[class*="channelTextArea_"]:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.08);
 }
 
 [class*="input_"]:focus {
@@ -328,18 +332,43 @@ li:has([class*="unread"]) {
   border-radius: 4px;
 }
 
-/* VOICE CHANNEL JOIN ANIMATION */
-[class*="voiceUser_"] {
-  animation: fluidFadeIn 0.2s ease;
+/* USER PANEL BOTTOM LEFT — subtle glow on hover */
+[class*="container__37e49"] {
+  transition: background 0.2s ease;
+  border-radius: 8px;
 }
 
-[class*="voiceUser_"] [class*="avatar_"] {
-  will-change: transform;
+[class*="container__37e49"]:hover {
+  background: rgba(255, 255, 255, 0.06) !important;
+}
+
+/* CHANNEL CATEGORY HEADERS — scale on hover */
+[class*="mainContent_"][role="button"] {
+  transition: transform 0.15s cubic-bezier(0.34, 1.1, 0.64, 1);
+  transform-origin: left center;
+}
+
+[class*="mainContent_"][role="button"]:hover {
+  transform: scale(1.02);
+}
+
+/* SEARCH BAR — expand and glow on focus */
+[class*="searchBar_"] {
+  transition: box-shadow 0.2s ease, background 0.2s ease;
+}
+
+[class*="searchBar_"]:focus-within {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.1);
+  background: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* VOICE CHANNEL — individual user row only */
+[class*="voiceUser_"] [class*="userAvatar_"] {
   transition: transform 0.15s ease;
 }
 
-[class*="voiceUser_"] [class*="avatar_"]:hover {
-  transform: scale(1.1);
+[class*="voiceUser_"]:hover [class*="userAvatar_"] {
+  transform: scale(1.15);
 }
 
 /* ACCESSIBILITY */
