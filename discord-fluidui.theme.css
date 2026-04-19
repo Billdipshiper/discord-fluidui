@@ -51,6 +51,10 @@
   animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
+[class*="modal_"][class*="root_"] > :first-child {
+  animation: fluidScaleIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
 [class*="layer_"] > [class*="animatorLeft_"],
 [class*="layer_"] > [class*="animatorRight_"],
 [class*="layer_"] > [class*="animatorBottom_"],
@@ -376,7 +380,6 @@ li:has([class*="unread"]) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
   }
 }
 
